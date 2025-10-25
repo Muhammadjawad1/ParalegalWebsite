@@ -8,10 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-      "predeploy": "npm run build",
-      "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://muhammadjawad1.github.io/ParalegalWebsite/",
+  "homepage": "https://muhammadjawad1.github.io/ParalegalWebsite",
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "react": "^19.1.1",
