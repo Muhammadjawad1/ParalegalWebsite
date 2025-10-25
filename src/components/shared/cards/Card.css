@@ -1,0 +1,63 @@
+/* Card Component Styles */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Variants */
+.card-compact {
+  padding: 1.5rem;
+}
+
+.card-large {
+  padding: 3rem;
+}
+
+.card-no-padding {
+  padding: 0;
+}
+
+/* Card Content */
+.card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+  font-family: 'Arial', sans-serif;
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+  }
+  
+  .card-compact {
+    padding: 1.2rem;
+  }
+  
+  .card-large {
+    padding: 2rem;
+  }
+}
