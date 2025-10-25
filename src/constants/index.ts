@@ -1,4 +1,5 @@
-import { PracticeArea, Testimonial } from '../types';
+import type { PracticeArea, Testimonial } from '../types';
+
 
 export const PRACTICE_AREAS: PracticeArea[] = [
   {
