@@ -2,6 +2,13 @@ import React from 'react';
 import './LegalSolutions.css';
 
 const LegalSolutions: React.FC = () => {
+  const scrollToAppointment = () => {
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+      heroSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="legal-solutions">
       <div className="legal-solutions-container">
@@ -33,15 +40,17 @@ const LegalSolutions: React.FC = () => {
           </div>
         </div>
         <div className="content-section">
-          <h2 className="content-title">
+         <div>
+         <h2 className="content-title">
             We Provide Highly Reliable & Effective Legal Solutions
           </h2>
-          <p className="content-description">
+         </div>
+        <div>  <p className="content-description">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, explicabo iste a labore id est quas, doloremque veritatis! Provident odit pariatur dolorem quisquam, voluptatibus voluptates optio accusamus, vel quasi quidem!
-          </p>
-          <button className="appointment-button">
+          </p></div>
+          <div><button className="appointment-button" onClick={scrollToAppointment}>
             Book an appointment
-          </button>
+          </button></div>
         </div>
       </div>
     </section>

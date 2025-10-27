@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { sendBookingEmail } from '../../../services/emailService';
+import type { BookingFormData } from '../../../services/emailService';
 import './Hero.css';
 
 const Hero: React.FC = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<BookingFormData>({
     name: '',
     email: '',
     date: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -16,10 +20,28 @@ const Hero: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const success = await sendBookingEmail(formData);
+      
+      if (success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', date: '' });
+        // Show success message
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Booking submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -35,6 +57,19 @@ const Hero: React.FC = () => {
           <div className="booking-form-container">
             <form className="booking-form" onSubmit={handleSubmit}>
               <h2 className="form-title">Book an Appointment</h2>
+              
+              {submitStatus === 'success' && (
+                <div className="success-message">
+                  ✅ Appointment request sent successfully! We'll contact you soon.
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="error-message">
+                  ❌ Failed to send appointment request. Please try again or contact us directly.
+                </div>
+              )}
+
               <div className="form-group">
                 <input
                   type="text"
@@ -66,8 +101,12 @@ const Hero: React.FC = () => {
                 />
                 <span className="calendar-icon">📅</span>
               </div>
-              <button type="submit" className="book-button">
-                Book Appointment
+              <button 
+                type="submit" 
+                className="book-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Book Appointment'}
               </button>
             </form>
           </div>
